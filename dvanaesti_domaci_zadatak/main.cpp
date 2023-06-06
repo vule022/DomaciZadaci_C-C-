@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <stack>
-#include <fstream>
 #include <algorithm>
+#include <fstream>
+#include <stack>
 #include <string>
 
 class Sat
@@ -14,94 +14,95 @@ protected:
     double trajanjeBaterije;
 
 public:
-    Sat(std::string ime, std::string model, int godinaProizvodnje, double trajanjeBaterije)
-        : ime(ime), model(model), godinaProizvodnje(godinaProizvodnje), trajanjeBaterije(trajanjeBaterije) {}
+    Sat(std::string ime, std::string model, int godina, double trajanje)
+        : ime(ime), model(model), godinaProizvodnje(godina), trajanjeBaterije(trajanje) {}
 
-    virtual double preostaloTrajanjeBaterije()
+    virtual void Info() const
     {
-        return (trajanjeBaterije * 2) * 7;
+        std::cout << "Ime: " << ime << "\nModel: " << model
+                  << "\nGodina proizvodnje: " << godinaProizvodnje
+                  << "\nTrajanje baterije (u danima): " << trajanjeBaterije << std::endl;
     }
 
-    virtual void info()
+    bool operator==(const Sat &other) const
     {
-        std::cout << "Ime: " << ime << "\nModel: " << model << "\nGodina proizvodnje: " << godinaProizvodnje
-                  << "\nTrajanje baterije: " << trajanjeBaterije << std::endl;
+        return ime == other.ime && model == other.model && godinaProizvodnje == other.godinaProizvodnje;
     }
 };
 
 class KvarcniSat : public Sat
 {
-protected:
+private:
     double velicinaBaterije;
 
 public:
-    KvarcniSat(std::string ime, std::string model, int godinaProizvodnje, double trajanjeBaterije, double velicinaBaterije)
-        : Sat(ime, model, godinaProizvodnje, trajanjeBaterije), velicinaBaterije(velicinaBaterije) {}
+    KvarcniSat(std::string ime, std::string model, int godina, double trajanje, double velicina)
+        : Sat(ime, model, godina, trajanje), velicinaBaterije(velicina) {}
 
-    double preostaloTrajanjeBaterije() override
+    void Info() const override
     {
-        return (trajanjeBaterije * 24) * 7;
-    }
-
-    void info() override
-    {
-        Sat::info();
+        Sat::Info();
         std::cout << "Velicina baterije: " << velicinaBaterije << " Ah" << std::endl;
     }
 
-    static KvarcniSat ucitajIzFajla(std::istream &is)
+    bool operator==(const KvarcniSat &other) const
     {
-        std::string ime, model, line;
-        int godinaProizvodnje;
-        double trajanjeBaterije, velicinaBaterije;
-
-        std::getline(is, ime);
-        std::getline(is, model);
-        std::getline(is, line);
-        godinaProizvodnje = std::stoi(line);
-        std::getline(is, line);
-        trajanjeBaterije = std::stod(line);
-        std::getline(is, line);
-        velicinaBaterije = std::stod(line);
-
-        return KvarcniSat(ime, model, godinaProizvodnje, trajanjeBaterije, velicinaBaterije);
-    }
-
-    void upisiUFajl(std::ostream &os)
-    {
-        os.write(ime.data(), ime.size());
-        os.put('\n');
-        os.write(model.data(), model.size());
-        os.put('\n');
-        os.write(std::to_string(godinaProizvodnje).data(), std::to_string(godinaProizvodnje).size());
-        os.put('\n');
-        os.write(std::to_string(trajanjeBaterije).data(), std::to_string(trajanjeBaterije).size());
-        os.put('\n');
-        os.write(std::to_string(velicinaBaterije).data(), std::to_string(velicinaBaterije).size());
-        os.put('\n');
+        return Sat::operator==(other) && velicinaBaterije == other.velicinaBaterije;
     }
 };
 
 int main()
 {
-    std::stack<KvarcniSat> stek;
-    std::ifstream ulaz("ulaz.txt");
-    std::ofstream izlaz("izlaz.txt");
+    std::vector<Sat *> satovi;
 
-    while (ulaz.good())
+    satovi.push_back(new Sat("Rolex", "Submariner", 2021, 120.0));
+    satovi.push_back(new Sat("Omega", "Seamaster", 2021, 90.0));
+    satovi.push_back(new KvarcniSat("Casio", "G-Shock", 2021, 168.0, 5.0));
+    satovi.push_back(new KvarcniSat("Seiko", "Quartz", 2021, 168.0, 6.0));
+    satovi.push_back(new Sat("Tag Heuer", "Carrera", 2021, 100.0));
+
+    satovi.insert(satovi.begin() + 2, new KvarcniSat("Citizen", "Eco-Drive", 2021, 168.0, 4.0));
+
+    satovi.pop_back();
+
+    for (const auto &sat : satovi)
     {
-        stek.push(KvarcniSat::ucitajIzFajla(ulaz));
+        sat->Info();
+        std::cout << "-------------------" << std::endl;
     }
 
+    // Kreiraj novi objekat O1
+    KvarcniSat O1("Casio", "G-Shock", 2021, 168.0, 5.0);
+
+    // Proveri da li se O1 nalazi u vektoru
+    auto it = std::find(satovi.begin(), satovi.end(), &O1);
+
+    if (it != satovi.end())
+    {
+        std::cout << "Objekat je pronađen." << std::endl;
+    }
+    else
+    {
+        std::cout << "Objekat nije pronađen." << std::endl;
+    }
+
+    std::ifstream ulaz("ulaz.txt");
+    std::stack<Sat *> stek;
+    std::string ime, model;
+    int godina;
+    double trajanje, velicina;
+    while (ulaz >> ime >> model >> godina >> trajanje >> velicina)
+    {
+        stek.push(new KvarcniSat(ime, model, godina, trajanje, velicina));
+    }
+    ulaz.close();
+
+    std::ofstream izlaz("izlaz.txt");
     while (!stek.empty())
     {
-        KvarcniSat &sat = stek.top();
-        sat.info();
-        sat.upisiUFajl(izlaz);
+        izlaz << stek.top()->Info() << std::endl;
         stek.pop();
     }
-
-    ulaz.close();
     izlaz.close();
 
     return 0;
