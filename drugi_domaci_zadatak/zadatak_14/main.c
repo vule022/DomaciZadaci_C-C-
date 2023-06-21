@@ -1,3 +1,11 @@
+/*
+
+14.Napisati program koji slučajno bira cele brojeve iz intervala 0 - 9,
+prikazuje izabrani broj i prekida biranje brojeva kada je izabran broj
+5. Koristiti funkciju rand() iz biblioteke stdlib.h.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

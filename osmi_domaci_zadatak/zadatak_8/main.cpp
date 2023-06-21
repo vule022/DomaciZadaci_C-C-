@@ -1,3 +1,20 @@
+/*
+
+Kreirati klasu Osoba koja sadrži podatke: ime, adresa i starost. Napisati program kojim se
+učitavaju podaci za 5 osoba i ispisuju podaci o najmladjoj, najstarijoj, kao i o svim osobama koje
+se zovu Petar.
+Podatke klase smestiti u privatnoj (private) sekciji, a metode klase (get/set metode za pristup
+privatnim članovima, i ostale metode) u javnoj (public) sekciji.
+Deklaraciju klase smestiti u fajlu zaglavlja (npr. ImeKlase.h), a definicije funkcija članica klase
+napisati u fajlu ImeKlase.cpp.
+Za klasu kreirati podrazumevajući konstruktor, konstuktor sa parametrima i konstruktor kopiranja.
+Konstruktor sa parametrima implementirati korišćenjem pokazivača this.
+Navesti i primer konstruktora sa parametrima koji koristi listu za inicijalizaciju. Kreirati i
+destruktor klase u kome se ispisuje poruka “Objekat je uništen”.
+Glavni program napisati u main.cpp fajlu.
+
+*/
+
 #include <iostream>
 #include <vector>
 #include "Osoba.h"

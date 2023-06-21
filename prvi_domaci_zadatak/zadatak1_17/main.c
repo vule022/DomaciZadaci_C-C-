@@ -1,20 +1,32 @@
+/*
+
+23. Cena čokolade na tržistu svakim danom raste za 2%. Korisnik unosi početnu
+cenu čokolade i broj dana. Na osnovu unetih informacija treba izračunati
+koliko će biti cena čokolade za 20 dana. (Rast cene na dnevnom nivou je
+jednak ceni proizvoda * 0.02).
+
+*/
+
 #include <stdio.h>
-#include <math.h>
-#define PI 3.14159
 
 int main()
 {
-    float radius;
-    float obim, povrsina;
+    double pocetnaCena;
+    int brojDana;
 
-    printf("Unesite vrednost radijusa kruga: ");
-    scanf("%f", &radius);
+    printf("Unesite pocetnu cenu cokolade: ");
+    scanf("%lf", &pocetnaCena);
 
-    obim = 2 * radius * PI;
-    povrsina = radius * radius * PI;
+    printf("Unesite broj dana: ");
+    scanf("%d", &brojDana);
 
-    printf("Obim kruga: %.2f\n", obim);
-    printf("Povrsina kruga: %.2f\n", povrsina);
+    double cenaCokolade = pocetnaCena;
+    for (int i = 1; i <= brojDana; i++)
+    {
+        cenaCokolade += cenaCokolade * 0.02;
+    }
+
+    printf("Cena cokolade za %d dana: %.2lf\n", brojDana, cenaCokolade);
 
     return 0;
 }

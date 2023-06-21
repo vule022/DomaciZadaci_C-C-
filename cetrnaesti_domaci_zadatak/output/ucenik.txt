@@ -1,0 +1,6 @@
+Marko Jankovic,Beograd,8,2
+Jelena Petrovic,Novi Sad,8,1
+Stefan Ilic,Kragujevac,7,3
+Marija Nikolic,Nis,8,2
+Petar Djokic,Subotica,7,1
+Sandra Zivic,Beograd,8,2

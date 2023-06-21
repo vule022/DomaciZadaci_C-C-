@@ -1,3 +1,26 @@
+/*
+
+Kreirati klasu Tacka koja kao polja ima koordinate x i y. Kreirati klasu krug koja kao polja
+ima centar tipa Tacka i poluprecnik. Napraviti metod koji računa površinu kruga, drugi metod
+koji računa obim kruga, a napisati još i funkciju koja proverava da li zadata tacka pripada
+krugu. Uglavnom programu kreirati Krug sa centrom C. Zatim napraviti niz od 10 drugih
+tacaka i za svaku od tih tacaka proveriti da li se nalazi u unutrašnjosti kruga i ako se nalazi
+ispisati njene koordinate.
+Podatke klase smestiti u privatnoj (private) sekciji a metode klase (get/set metode za pristup
+privatnim članovima, i ostale metode) u javnoj (public) sekciji. Kreirati i prijateljske funkcije
+koje imaju ulogu setter metoda.
+Deklaraciju klase smestiti u fajlu zaglavlja(npr. ImeKlase.h), a definiciju funkcija članica
+klase smestiti u fajlu ImeKlase.cpp. Glavni program napisati u main.cpp fajlu.
+Kreirati statički podatak (u sekciji private) koji ce da sluzi kao informacija o broju kreiranih
+objekata. Kreirati i destruktor u kome se ovaj statički podatak umanjuje za jedan pri
+unistavanju objekta. Kreirati staticku funkciju getBrojObjekata koja pristupa ovom statičkom
+podatku i štampa informaciju o trenutnom broju kreiranih objekata.
+Za klasu Tacka kreirati preklopljene operatore sabiranja (+), oduzimanja (-) i izjednačavanja
+(=) objekata klase. Kreirati i preklopljene operatore koje omogućavaju učitavanje (>>)
+odnosno štampanje objekata (<<) na ekran.
+
+*/
+
 #include "Tacka.h"
 #include "Krug.h"
 #include <iostream>
@@ -114,7 +137,7 @@ int main()
     }
     std::cout << "\n";
 
-    std::cout << "Tacne koje se nalaze u unutrasnjosti kruga:\n";
+    std::cout << "Tacke koje se nalaze u unutrasnjosti kruga:\n";
     for (const auto &tacka : tacke)
     {
         if (krug.tackaPripadaKrugu(tacka))

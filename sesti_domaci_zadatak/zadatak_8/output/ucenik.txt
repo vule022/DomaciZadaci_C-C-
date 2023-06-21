@@ -1,0 +1,5 @@
+Marko Markovic       | Adresa 1            | 5 | 2
+Ana Petrovic         | Adresa 2            | 4 | 3
+Jovan Jovanovic      | Adresa 3            | 5 | 2
+Milica Simic         | Adresa 4            | 6 | 1
+Stefan Stojanovic    | Adresa 5            | 5 | 4

@@ -1,3 +1,10 @@
+/*
+
+Slučajnim izborom formirati niz od 20 elemenata iz intervala 0-100. Odrediti maksimalni
+parni element niza i minimalni neparni element niza.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

@@ -1,3 +1,12 @@
+/*
+
+Napisati program koji formira niz od n elemenata i određuje minimalni element niza kao i
+njegovu poziciju u nizu. Funkciju koja računa minimalni element niza i indeks implementirati
+kao:
+void MinIndex(int *niz, int n, int *minElem, int *minIndex); gde je n broj elemenata.
+
+*/
+
 #include <stdio.h>
 
 void MinIndex(int *niz, int n, int *minElem, int *minIndex)
@@ -17,7 +26,7 @@ void MinIndex(int *niz, int n, int *minElem, int *minIndex)
 
 int main()
 {
-    int n;
+    int n = 0;
     printf("Unesite broj elemenata niza: ");
     scanf("%d", &n);
 

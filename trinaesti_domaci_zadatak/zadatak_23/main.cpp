@@ -1,3 +1,10 @@
+/*
+
+Naša firma se bavi proizvodnjom satova. Svaki sat ima svoje ime, model, godinu proizvodnje kao i
+trajanje baterije. Ukoliko se desi da ime ima manje od 2 karaktera treba da se desi ImeNijeValidnoException.
+
+*/
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -17,7 +24,8 @@ private:
     std::string ime;
     std::string model;
     int godinaProizvodnje;
-    double trajanjeBaterije; // trajanje baterije u satima
+    double trajanjeBaterije;
+
 public:
     Sat(const std::string &ime, const std::string &model, int godinaProizvodnje, double trajanjeBaterije)
         : model(model), godinaProizvodnje(godinaProizvodnje), trajanjeBaterije(trajanjeBaterije)

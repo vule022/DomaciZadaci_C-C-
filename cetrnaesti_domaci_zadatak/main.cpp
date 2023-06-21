@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <sstream>
+#include <vector>
 
 struct Ucenik
 {
@@ -12,33 +13,43 @@ struct Ucenik
 
 int main()
 {
-    int trazeniRazred, trazenoOdeljenje;
-    std::cout << "Unesite razred: ";
-    std::cin >> trazeniRazred;
-    std::cout << "Unesite odeljenje: ";
-    std::cin >> trazenoOdeljenje;
-
-    std::ifstream inputFile("ucenik.txt");
-    if (!inputFile)
+    std::ifstream file("ucenik.txt");
+    if (!file.is_open())
     {
-        std::cerr << "Greska pri otvaranju datoteke." << std::endl;
+        std::cout << "Greska prilikom otvaranja fajla." << std::endl;
         return 1;
     }
 
-    Ucenik ucenik;
-    while (inputFile >> ucenik.ime >> ucenik.adresa >> ucenik.razred >> ucenik.odeljenje)
+    std::vector<Ucenik> ucenici;
+
+    std::string line;
+    while (std::getline(file, line))
     {
-        if (ucenik.razred == trazeniRazred && ucenik.odeljenje == trazenoOdeljenje)
-        {
-            std::cout << "Ime: " << ucenik.ime << std::endl;
-            std::cout << "Adresa: " << ucenik.adresa << std::endl;
-            std::cout << "Razred: " << ucenik.razred << std::endl;
-            std::cout << "Odeljenje: " << ucenik.odeljenje << std::endl;
-            std::cout << "------------------------" << std::endl;
-        }
+        std::stringstream ss(line);
+        Ucenik ucenik;
+        std::getline(ss, ucenik.ime, ',');
+        std::getline(ss, ucenik.adresa, ',');
+        ss >> ucenik.razred;
+        ss.ignore(1, ',');
+        ss >> ucenik.odeljenje;
+        ucenici.push_back(ucenik);
     }
 
-    inputFile.close();
+    file.close();
+
+    int N, M;
+    std::cout << "Unesite razred (N): ";
+    std::cin >> N;
+    std::cout << "Unesite odeljenje (M): ";
+    std::cin >> M;
+
+    for (const auto &ucenik : ucenici)
+    {
+        if (ucenik.razred == N && ucenik.odeljenje == M)
+        {
+            std::cout << ucenik.ime << ", " << ucenik.adresa << ", " << ucenik.razred << ", " << ucenik.odeljenje << std::endl;
+        }
+    }
 
     return 0;
 }

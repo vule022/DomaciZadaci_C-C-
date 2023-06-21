@@ -1,51 +1,64 @@
+/*
+
+Napisati program koji učitava podatke iz datoteke ucenik.txt čija je struktura (ime*35+,
+adresa*50+, razred, odeljenje) data na slici ispod i prikazuje samo učenike razreda N i
+odeljenja M. N i M unosimo u programu.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_IME 35
-#define MAX_ADRESA 50
+#define MAX_IME_LENGTH 35
+#define MAX_ADRESA_LENGTH 50
 
 struct Ucenik
 {
-    char ime[MAX_IME];
-    char adresa[MAX_ADRESA];
+    char ime[MAX_IME_LENGTH + 1];
+    char adresa[MAX_ADRESA_LENGTH + 1];
     int razred;
-    int odeljenje;
+    char odeljenje;
 };
 
-int main()
+void prikaziUcenike(const char *filename, int razred, char odeljenje)
 {
-    int razredN, odeljenjeM;
-
-    printf("Unesite razred N: ");
-    scanf("%d", &razredN);
-
-    printf("Unesite odeljenje M: ");
-    scanf("%d", &odeljenjeM);
-
-    FILE *datoteka;
-    datoteka = fopen("ucenik.txt", "r");
-
-    if (datoteka == NULL)
+    FILE *file = fopen(filename, "r");
+    if (file == NULL)
     {
         printf("Greska pri otvaranju datoteke.\n");
-        return 1;
+        return;
     }
 
     struct Ucenik ucenik;
-    while (fread(&ucenik, sizeof(struct Ucenik), 1, datoteka))
+
+    while (fscanf(file, "%[^|]|%[^|]|%d | %c\n", ucenik.ime, ucenik.adresa, &ucenik.razred, &ucenik.odeljenje) == 4)
     {
-        if (ucenik.razred == razredN && ucenik.odeljenje == odeljenjeM)
+        if (ucenik.razred == razred && ucenik.odeljenje == odeljenje)
         {
             printf("Ime: %s\n", ucenik.ime);
             printf("Adresa: %s\n", ucenik.adresa);
             printf("Razred: %d\n", ucenik.razred);
-            printf("Odeljenje: %d\n", ucenik.odeljenje);
-            printf("-------------------------\n");
+            printf("Odeljenje: %c\n", ucenik.odeljenje);
+            printf("\n");
         }
     }
 
-    fclose(datoteka);
+    fclose(file);
+}
+
+int main()
+{
+    int razred;
+    char odeljenje;
+
+    printf("Unesite razred: ");
+    scanf("%d", &razred);
+
+    printf("Unesite odeljenje: ");
+    scanf(" %c", &odeljenje);
+
+    prikaziUcenike("ucenik.txt", razred, odeljenje);
 
     return 0;
 }

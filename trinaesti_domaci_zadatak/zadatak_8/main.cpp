@@ -1,3 +1,10 @@
+/*
+
+8. Kreirati osnovnu klasu za studente. Svaki student ima: ime, prezime, adresu, grad, indeks. Ukoliko ime
+grada ne počinje velikim početnim slovom treba da se desi ImeGradaNijeValidnoException.
+
+*/
+
 #include <iostream>
 #include <stdexcept>
 #include <string>

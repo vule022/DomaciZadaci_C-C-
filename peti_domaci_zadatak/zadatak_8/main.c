@@ -1,5 +1,21 @@
+/*
+
+Data je struktura
+struct Student {
+char ime[10];
+char prezime[10];
+
+char smer;
+double prosek;
+}
+a) Napisati funkciju koja učitava sa standardnog ulaza podatke o studentu.
+b) Napisati funkciju koja ispisuje podatke o studentu na standardni izlaz.
+U glavnom programu ucitati niz od 5 studenata i ispisati podatke o studentu sa najvecim
+prosekom.
+
+*/
+
 #include <stdio.h>
-#include <stdlib.h>
 
 struct Student
 {
@@ -11,17 +27,17 @@ struct Student
 
 void ucitajStudenta(struct Student *student)
 {
-    printf("Unesite ime studenta: ");
+    printf("Unesite ime: ");
     scanf("%s", student->ime);
 
-    printf("Unesite prezime studenta: ");
+    printf("Unesite prezime: ");
     scanf("%s", student->prezime);
 
-    printf("Unesite smer studenta: ");
-    scanf(" %c", &(student->smer));
+    printf("Unesite smer: ");
+    scanf(" %c", &student->smer);
 
-    printf("Unesite prosek studenta: ");
-    scanf("%lf", &(student->prosek));
+    printf("Unesite prosek: ");
+    scanf("%lf", &student->prosek);
 }
 
 void ispisiStudenta(const struct Student *student)
@@ -34,33 +50,27 @@ void ispisiStudenta(const struct Student *student)
 
 int main()
 {
-    struct Student nizStudenata[5];
-    int i;
-    double najveciProsek = 0.0;
-    int indeksNajveceg = 0;
+    struct Student studenti[5];
+    double maxProsek = 0.0;
+    int indexNajveciProsek = 0;
 
-    for (i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         printf("Unos podataka za studenta %d:\n", i + 1);
-        ucitajStudenta(&nizStudenata[i]);
+        ucitajStudenta(&studenti[i]);
         printf("\n");
     }
 
-    for (i = 0; i < 5; i++)
+    printf("Podaci o studentu sa najvecim prosekom:\n");
+    for (int i = 0; i < 5; i++)
     {
-        printf("Podaci o studentu %d:\n", i + 1);
-        ispisiStudenta(&nizStudenata[i]);
-        printf("\n");
-
-        if (nizStudenata[i].prosek > najveciProsek)
+        if (studenti[i].prosek > maxProsek)
         {
-            najveciProsek = nizStudenata[i].prosek;
-            indeksNajveceg = i;
+            maxProsek = studenti[i].prosek;
+            indexNajveciProsek = i;
         }
     }
-
-    printf("Student s najvećim prosekom:\n");
-    ispisiStudenta(&nizStudenata[indeksNajveceg]);
+    ispisiStudenta(&studenti[indexNajveciProsek]);
 
     return 0;
 }

@@ -1,3 +1,9 @@
+/*
+
+Napisati program koji umeće string s2 u string s1 počev od pozicije p. Korisnik unosi p.
+
+*/
+
 #include <stdio.h>
 #include <string.h>
 

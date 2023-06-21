@@ -1,3 +1,12 @@
+/*
+
+Napisati funkciju koja nalazi sve proste brojeve manje od broja N. Funkcija treba
+glavnom programu kroz listu argumenata da vrati dinamički niz koji sadrži te proste
+brojeve i broj prostih. Napisati i glavni program koji učitava broj N i štampa niz prostih
+brojeva kao i koliko ih ima.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

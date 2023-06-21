@@ -1,3 +1,12 @@
+/*
+
+Napisati program koji učitava vrednost proizvoda u din., pa zatim izračunava i
+prikazuje koliko je potrebno novčanica od 500 din, 100 din i 1 din za plaćanje tog
+proizvoda. Uraditi zadatak korišćenjem C++ klasa i modifikatora za ulaz/izlaz (cin, cout,
+setprecision, setwidth...).
+
+*/
+
 #include <iostream>
 #include <iomanip>
 

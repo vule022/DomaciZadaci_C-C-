@@ -1,3 +1,13 @@
+/*
+
+Firma se bavi proizvodnjom satova. Svaki sat ima svoje ime, model, godinu proizvodnje
+kao i trajanje baterije. Od satova pravimo kvarcne satove. O kvarcnim satovima još
+čuvamo veličinu baterije. Sat bi trebao da ima opciju da se vidi koliko još baterija ima.
+Kod kvarcnih satova trajanje baterije se računa kao (trajanja baterije * 24)*7, dok kod
+opštih satova (trajanje baterije * 2)*7.
+
+*/
+
 #include <iostream>
 #include <string>
 
